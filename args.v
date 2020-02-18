@@ -13,11 +13,16 @@ pub:
 	homepage string
 }
 
+fn (self Arguments) process() { }
+
 interface Argumenter {
 	do_match(arg string) bool
+	validate()
 }
 
 struct BaseArg {
+mut:
+	result_v string
 pub:
 	arg_type ArgType
 	name string
@@ -32,18 +37,20 @@ fn (self BaseArg) do_match(arg string) bool {
 	return false
 }
 
+fn (self BaseArg) validate() { }
+
 fn bool_arg(n string, a []string, h string) &BaseArg {
-	return &BaseArg{ArgType.bool_t, n, a, h}
+	return &BaseArg{"", ArgType.bool_t, n, a, h}
 }
 
 fn string_arg(n string, a []string, h string) &BaseArg {
-	return &BaseArg{ArgType.string_t, n, a, h}
+	return &BaseArg{"", ArgType.string_t, n, a, h}
 }
 
 fn int_arg(n string, a []string, h string) &BaseArg {
-	return &BaseArg{ArgType.int_t, n, a, h}
+	return &BaseArg{"", ArgType.int_t, n, a, h}
 }
 
 fn float_arg(n string, a []string, h string) &BaseArg {
-	return &BaseArg{ArgType.float_t, n, a, h}
+	return &BaseArg{"", ArgType.float_t, n, a, h}
 }
