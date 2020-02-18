@@ -39,3 +39,11 @@ fn bool_arg(n string, a []string, h string) &BaseArg {
 fn string_arg(n string, a []string, h string) &BaseArg {
 	return &BaseArg{ArgType.string_t, n, a, h}
 }
+
+fn int_arg(n string, a []string, h string) &BaseArg {
+	return &BaseArg{ArgType.int_t, n, a, h}
+}
+
+fn float_arg(n string, a []string, h string) &BaseArg {
+	return &BaseArg{ArgType.float_t, n, a, h}
+}
