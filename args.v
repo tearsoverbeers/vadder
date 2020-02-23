@@ -67,16 +67,19 @@ fn (self BaseArg) do_match(arg string) bool {
 	// now see if it's a plan9 or gnu style short flag
 	} else if arg[0..1].contains("-") {
 		arg_b = arg[1..]
+		if arg_b == self.name {
+			return true
+		} else if arg_b.contains("=") && arg_b.split("=")[0] == self.name {
+			return true
+		} else {
+			return false
+		}
 	} else if arg.contains("=") && arg.split("=")[0] == self.name	{
-		arg_b = arg
+		return true
 	// we've failed out of known styles to parse
 	} else {
 		return false
 	}
-
-	// if we've gotten this far, then we need to check for
-	// assignment type arguments
-	return false
 }
 
 fn (self BaseArg) validate() { }
